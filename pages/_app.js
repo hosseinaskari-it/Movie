@@ -1,32 +1,31 @@
+import Layout from "parts/Layout";
+import { Provider } from "react-redux";
+import { useStore } from "store";
+import GlobalStyle from "styles/global";
+import { lightTheme, darkTheme } from "styles/theme";
+import { ThemeProvider } from "styled-components";
+import useDarkTheme from "utils/hooks/useDarkTheme";
+import { AuthProvider } from "utils/hocs/AuthProvider";
 
-
-import { Provider } from 'react-redux';
-import globalStyles from 'styles/global';
-
-import { useStore } from 'store';
-import ThemeProvider from 'utils/hocs/ThemeProvider';
-import Layout from 'parts/Layout';
-import { AuthProvider } from 'utils/hocs/AuthProvider';
-
-const MyApp = ({ Component, pageProps }) => {
+function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
+  const [theme, themeToggler] = useDarkTheme();
+  const selectedTheme = theme === "light" ? lightTheme : darkTheme;
 
   return (
     <>
       <Provider store={store}>
-        <ThemeProvider>
+        <ThemeProvider theme={selectedTheme}>
+          <GlobalStyle />
           <AuthProvider>
-            <Layout>
+            <Layout themeToggler={themeToggler}>
               <Component {...pageProps} />
             </Layout>
           </AuthProvider>
         </ThemeProvider>
       </Provider>
-      <style jsx global>
-        {globalStyles}
-      </style>
     </>
   );
-};
+}
 
 export default MyApp;

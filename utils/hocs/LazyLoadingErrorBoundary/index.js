@@ -1,40 +1,43 @@
+import React, { Component } from "react";
+import styled from "styled-components";
 
+const StyledCounter = styled.div`
+  padding: 64px 0;
+  text-align: center;
+`;
 
-import React, { Component } from 'react';
+const Paragraph = styled.p`
+  text-align: center;
+  padding: 12px 0;
+`;
 
-/*** Adapted from https://reactjs.org/docs/error-boundaries.html ***/
 class LazyLoadingErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = {hasError: false};
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error) {
-    console.log('[LazyLoadingErrorBoundary getDerivedStateFromError] error => ', error);
-    return {hasError: true};
+    console.log(
+      "[LazyLoadingErrorBoundary getDerivedStateFromError] error => ",
+      error
+    );
+    return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          style={{
-            padding: '64px 0',
-            textAlign: 'center'
-          }}>
-          <button onClick={() => window.location.reload()}>Click to Reload</button>
-          <p
-            style={{
-              textAlign: 'center',
-              padding: '12px 0'
-            }}>
-            Lazy-loading failed!
-          </p>
-        </div>
+        <StyledCounter>
+          <button onClick={() => window.location.reload()}>
+            Click to Reload
+          </button>
+          <Paragraph>Lazy-loading failed!</Paragraph>
+        </StyledCounter>
       );
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 

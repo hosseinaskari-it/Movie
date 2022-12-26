@@ -1,9 +1,4 @@
 
-/**
- * MEMO: inspired by https://github.com/n49/react-stars.
- * TODO: should be improved (code-standard & code-size) based on a functional component.
- * TODO: more delicate fractional star instead of just a half star
- */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 

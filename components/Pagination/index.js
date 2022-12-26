@@ -1,4 +1,3 @@
-
 import PaginationWrapper from './PaginationWrapper';
 import PaginationButton from './PaginationButton';
 import CLASS_NAMES from 'utils/constants/class-names';

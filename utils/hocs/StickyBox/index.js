@@ -1,4 +1,3 @@
-
 // MEMO: adopted from https://github.com/codecks-io/react-sticky-box
 import React from "react";
 import PropTypes from "prop-types";

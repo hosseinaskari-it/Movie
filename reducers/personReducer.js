@@ -1,5 +1,4 @@
 
-
 import * as TYPES from 'actions/types';
 
 const personReducer = (state = { loading: true }, action) => {

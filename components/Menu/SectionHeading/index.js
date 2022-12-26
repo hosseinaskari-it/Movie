@@ -1,27 +1,24 @@
+import styled from "styled-components";
 
+const Container = styled.h2`
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
 
-import withTheme from 'utils/hocs/withTheme';
+  font-size: 1.25rem;
+  color: ${({ theme }) => theme.palettetextprimary};
 
-const SectionHeading = ({
-  theme,
-  children
-}) => (
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin: 0 0 1rem 1rem;
+
+  &:not(:first-child) {
+    margin-left: 8px;
+  }
+`;
+
+const SectionHeading = ({ children }) => (
   <>
-    <h2>
-      {children}
-    </h2>
-    <style jsx>{`
-      font-weight: ${theme.typography.fontWeightBold};
-      font-size: 1.25rem;
-      color: var(--palette-text-primary);
-      text-transform: uppercase;
-      letter-spacing: -0.5px;
-      margin: 0 0 1rem 1rem;
-      h2:not(:first-child) {
-        margin-top: 4rem;
-      }
-    `}</style>
+    <Container>{children}</Container>
   </>
 );
 
-export default withTheme(SectionHeading);
+export default SectionHeading;

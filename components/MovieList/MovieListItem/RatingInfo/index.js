@@ -1,39 +1,31 @@
+import Rating from "components/Rating";
+import Tooltip from "components/UI/Tooltip";
+import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-bottom: 0.5rem;
+`;
 
-import clsx from 'clsx';
+const TooltipItem = styled(Tooltip)`
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
 
-import Rating from 'components/Rating';
-import Tooltip from 'components/UI/Tooltip';
+  &:hover {
+    visibility: visible;
+  }
+`;
 
-const RatingInfo = ({
-  className,
-  voteAverage,
-  tooltip
-}) => (
+const RatingInfo = ({ voteAverage, tooltip }) => (
   <>
-    <div className={clsx('rating-info', className)}>
+    <Container>
       <Rating voteAverage={voteAverage} />
-      <Tooltip className='tooltip-position tooltip-show'>{tooltip}</Tooltip>
-    </div>
-    <style jsx>{`
-      .rating-info {
-        display: flex;
-        position: relative;
-        align-items: center;
-        margin-bottom: 0.5rem;
-      }
-
-      :global(.tooltip-position) {
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-
-      .rating-info:hover :global(.tooltip-show) {
-        visibility: visible;
-      }
-    `}</style>
+      <TooltipItem>{tooltip}</TooltipItem>
+    </Container>
   </>
 );
 

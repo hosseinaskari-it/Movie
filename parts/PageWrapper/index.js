@@ -1,22 +1,11 @@
+import styled from "styled-components";
 
-import clsx from 'clsx';
-
-const PageWrapper = ({
-  className,
-  children,
-  ...rest
-}) => (
+const Container = styled.div`
+  width: 100%;
+`;
+const PageWrapper = ({ children, ...rest }) => (
   <>
-    <div
-      className={clsx('page-wrapper', className)}
-      {...rest}>
-      {children}
-    </div>
-    <style jsx>{`
-      .page-wrapper {
-        width: 100%;
-      }
-    `}</style>
+    <Container {...rest}>{children}</Container>
   </>
 );
 

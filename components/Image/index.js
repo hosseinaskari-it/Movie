@@ -1,16 +1,16 @@
+import { useState, useEffect } from "react";
+import GradientImageWrapper from "parts/GradientImageWrapper";
+import styled from "styled-components";
 
-import { useState, useEffect } from 'react';
-import clsx from 'clsx';
-
-import GradientImageWrapper from 'parts/GradientImageWrapper';
+const Picture = styled.img`
+  object-fit: ${(props) => (props.error ? "auto" : "none")};
+`;
 
 const Image = ({
   style,
-  className,
   loadingUI,
   placeholderPath,
   gradientOverlayEnabled,
-  overlayClass,
   fetchpriority,
   alt,
   ...rest
@@ -29,14 +29,12 @@ const Image = ({
     <>
       {/* TODO: it heavily depends on JS -> would be better to go with HTML and CSS */}
       {!loaded && loadingUI}
-      <GradientImageWrapper
-        className={overlayClass}
-        overlayEnabled={gradientOverlayEnabled}>
-        <img
-          className={clsx('img', className)}
+      <GradientImageWrapper overlayEnabled={gradientOverlayEnabled}>
+        <Picture
+          error= {error}
           onLoad={onImageLoadHandler}
           fetchpriority={fetchpriority}
-          onError={event => {
+          onError={(event) => {
             setError(true);
             if (event.target.src !== placeholderPath) {
               event.target.src = placeholderPath;
@@ -44,16 +42,12 @@ const Image = ({
           }}
           style={{
             ...style,
-            display: loaded ? 'block' : 'none'
+            display: loaded ? "block" : "none",
           }}
-          alt={alt ?? ''}
-          {...rest} />
+          alt={alt ?? ""}
+          {...rest}
+        />
       </GradientImageWrapper>
-      <style jsx>{`
-        .img {
-          object-fit: ${error ? 'contain' : 'cover'};
-        }
-      `}</style>
     </>
   );
 };

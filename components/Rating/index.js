@@ -1,38 +1,23 @@
+import ReactStars from "components/UI/ReactStars";
+import RatingValue from "./RatingValue";
+import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-import ReactStars from 'components/UI/ReactStars';
-import RatingValue from './RatingValue';
-import CLASS_NAMES from 'utils/constants/class-names';
+const RatingValueMain = styled(RatingValue)`
+  margin: 0 8px;
+  color: ${({ theme }) => theme.palettewarningmain};
+`;
 
-const RATING_VALUE_CLASS_NAME = 'rating-value-side-margin';
-
-const Rating = ({
-  voteAverage,
-  withValue
-}) => (
+const Rating = ({ voteAverage, withValue }) => (
   <>
-    <div className={CLASS_NAMES.RATING}>
-      <ReactStars
-        edit={false}
-        size={24}
-        color2='var(--palette-warning-main)'
-        value={voteAverage / 2.0} />
-      {withValue && (
-        <RatingValue
-          className={RATING_VALUE_CLASS_NAME}
-          value={voteAverage} />
-      )}
-    </div>
-    <style jsx>{`
-      .${CLASS_NAMES.RATING} {
-        display: flex;
-        align-items: center;
-      }
-      :global(.${RATING_VALUE_CLASS_NAME}) {
-        margin: 0 8px;
-        color: var(--palette-warning-main);
-      }
-    `}</style>
+    <Container>
+      <ReactStars edit={false} size={24} value={voteAverage / 2.0} />
+      {withValue && <RatingValueMain value={voteAverage} />}
+    </Container>
   </>
 );
 

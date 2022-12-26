@@ -1,9 +1,8 @@
-
 import Router from 'next/router';
 
 import * as TYPES from './types';
 import tmdbAPI from 'services/tmdbAPI';
-import LINKS from 'utils/constants/links';
+import LINKS from 'utils/constants/link';
 import { TMDB_API_VERSION } from 'config/tmdb';
 
 const getGenres = () => async dispatch => {

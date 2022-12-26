@@ -1,5 +1,3 @@
-
-
 // Get the basic cfg obj from API and Genres for the sidebar
 const FETCH_CONFIG = 'FETCH_CONFIG';
 const FETCH_GENRES = 'FETCH_GENRES';

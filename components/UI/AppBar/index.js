@@ -1,55 +1,43 @@
+import styled from "styled-components";
 
+const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: auto;
+  right: 0;
+  width: 100%;
+  z-index: ${({ theme }) => theme.zIndex.appBar};
 
-import clsx from 'clsx';
+  box-shadow: ${({ theme }) => theme.shadows[4]};
 
-import withTheme from 'utils/hocs/withTheme';
+  background-color: ${({ theme }) => theme.palettebackgroundpaper};
 
-const AppBar = ({
-  theme,
-  className = '',
-  children
-}) => (
+  -webkit-tap-highlight-color: transparent;
+
+  @media ${({ theme }) => theme.mediaQueries.smaller} {
+    background-color: transparent;
+  }
+`;
+
+const Container = styled.div`
+  min-height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media ${({ theme }) => theme.mediaQueries.small} {
+    min-height: 56px;
+    padding: 0 16px;
+  }
+`;
+
+const AppBar = ({ children }) => (
   <>
-    <header className={clsx('app-bar', className)}>
-      <div className='toolbar'>
-        {children}
-      </div>
-    </header>
-    <style jsx>{`
-      .app-bar {
-        position: fixed;
-        top: 0;
-        left: auto;
-        right: 0;
-        width: 100%;
-        z-index: ${theme.zIndex.appBar};
-        box-shadow: ${theme.shadows[4]};
-        background-color: var(--palette-background-paper);
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      .toolbar {
-        min-height: 64px;
-        padding: 0 24px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between
-      }
-
-      @media ${theme.mediaQueries.small} {
-        .toolbar {
-          min-height: 56px;
-          padding: 0 16px;
-        }
-      }
-
-      @media ${theme.mediaQueries.smaller} {
-        .app-bar {
-          background-color: transparent;
-        }
-      }
-    `}</style>
+    <Header>
+      <Container>{children}</Container>
+    </Header>
   </>
 );
 
-export default withTheme(AppBar);
+export default AppBar;

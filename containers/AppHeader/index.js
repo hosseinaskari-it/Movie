@@ -1,11 +1,8 @@
+import { useState } from "react";
+import BurgerHeader from "./BurgerHeader";
+import BurgerMenu from "./BurgerMenu";
 
-
-import { useState } from 'react';
-
-import BurgerHeader from './BurgerHeader';
-import BurgerMenu from './BurgerMenu';
-
-const AppHeader = ({ className }) => {
+const AppHeader = () => {
   const [opened, setOpened] = useState(false);
 
   const openMenuHandler = () => {
@@ -17,11 +14,9 @@ const AppHeader = ({ className }) => {
   };
 
   return (
-    <div className={className}>
+    <div>
       <BurgerHeader openMenu={openMenuHandler} />
-      <BurgerMenu
-        opened={opened}
-        closeMenu={closeMenuHandler} />
+      <BurgerMenu opened={opened} closeMenu={closeMenuHandler} />
     </div>
   );
 };

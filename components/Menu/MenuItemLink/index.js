@@ -1,43 +1,30 @@
+import Link from "next/link";
+import styled from "styled-components";
 
-import Link from 'next/link';
+const HyperLink = styled.a`
+  outline: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+  line-height: 1;
+  color: ${({ theme }) => theme.paletteprimarymain};
 
-import withTheme from 'utils/hocs/withTheme';
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
-const MenuItemLink = React.forwardRef(({
-  theme,
-  href,
-  as,
-  children,
-  selected,
-  ...rest
-}, ref) => (
-  <>
-    <Link
-      href={href}
-      as={as}
-      passHref>
-      <a
-        ref={ref}
-        {...rest}>
-        {children}
-      </a>
-    </Link>
-    <style jsx>{`
-      a {
-        outline: none;
-        display: block;
-        margin-bottom: 0.5rem;
-        font-size: 1.25rem;
-        font-weight: ${theme.typography.fontWeightBold};
-        line-height: 1;
-        color: ${selected ? 'var(--palette-secondary-main)' : 'var(--palette-primary-main)'};
-      }
+const MenuItemLink = React.forwardRef(
+  ({ href, as, children, selected, ...rest }, ref) => (
+    <>
+      <Link href={href} as={as} passHref>
+        <HyperLink ref={ref} {...rest}>
+          {children}
+        </HyperLink>
+      </Link>
+    </>
+  )
+);
 
-      a:hover {
-        text-decoration: underline;
-      }
-    `}</style>
-  </>
-));
-
-export default withTheme(MenuItemLink);
+export default MenuItemLink;

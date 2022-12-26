@@ -1,4 +1,3 @@
-
 import { createMedia } from '@artsy/fresnel';
 
 const ExampleAppMedia = createMedia({

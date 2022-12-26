@@ -1,35 +1,24 @@
+import styled from "styled-components";
 
-import withTheme from 'utils/hocs/withTheme';
+const Container = styled.div`
+  padding-right: 4rem;
+  padding-left: 4rem;
 
-const PaddingWrapper = ({
-  theme,
-  children
-}) => (
+  @media ${({ theme }) => theme.mediaQueries.larger} {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.large} {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+`;
+
+const PaddingWrapper = ({ children }) => (
   <>
-    <div className='padding-wrapper'>
-      {children}
-    </div>
-    <style jsx>{`
-      .padding-wrapper {
-        padding-right: 4rem;
-        padding-left: 4rem;
-      }
-
-      @media ${theme.mediaQueries.larger} {
-        .padding-wrapper {
-          padding-right: 3rem;
-          padding-left: 3rem;
-        }
-      }
-
-      @media ${theme.mediaQueries.large} {
-        .padding-wrapper {
-          padding-right: 2rem;
-          padding-left: 2rem;
-        }
-      }
-    `}</style>
+    <Container>{children}</Container>
   </>
 );
 
-export default withTheme(PaddingWrapper);
+export default PaddingWrapper;

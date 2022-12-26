@@ -1,26 +1,15 @@
+import styled from "styled-components";
 
+const Para = styled.p`
+  font-size: 1.5rem;
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+  line-height: 0;
+`;
 
-import clsx from 'clsx';
-
-import withTheme from 'utils/hocs/withTheme';
-
-const RatingValue = ({
-  theme,
-  className,
-  value
-}) => (
+const RatingValue = ({ value }) => (
   <>
-    <p className={clsx('rating-value', className)}>
-      {value}
-    </p>
-    <style jsx>{`
-      .rating-value {
-        font-size: 1.5rem;
-        font-weight: ${theme.typography.fontWeightBold};
-        line-height: 0;
-      }
-    `}</style>
+    <Para>{value}</Para>
   </>
 );
 
-export default withTheme(RatingValue);
+export default RatingValue;

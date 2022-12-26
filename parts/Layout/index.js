@@ -1,77 +1,58 @@
+import Sidebar from "containers/Sidebar";
+import ContentWrapper from "./ContentWrapper";
+import MainWrapper from "./MainWrapper";
+import { Media, MediaContextProvider } from "utils/helpers/media";
+import styled from "styled-components";
+import SearchBar from "containers/SearchBar";
+import ThemeToggler from "containers/ThemeToggler.js";
+import TheUser from "containers/TheUser";
+import AppHeader from "containers/AppHeader";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import init from "actions/init";
+import MyHead from "components/MyHead";
 
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+const Desktopwidgets = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  > * {
+    &:not(:first-child) {
+      margin-left: 12px;
+    }
+  }
+`;
 
-import Sidebar from 'containers/Sidebar';
-import AppHeader from 'containers/AppHeader';
-import MyHead from 'components/MyHead';
-import SearchBar from 'containers/SearchBar';
-import DarkModeToggle from 'containers/DarkModeToggle';
-import TheUser from 'containers/TheUser';
-import MainWrapper from './MainWrapper';
-import ContentWrapper from './ContentWrapper';
-import init from 'actions/init';
-import withTheme from 'utils/hocs/withTheme';
-import { Media, MediaContextProvider } from 'utils/helpers/media';
-
-const Layout = ({
-  theme,
-  children
-}) => {
-  // TODO: Client-side Rendering for now
-  // RE: https://nextjs.org/learn/basics/data-fetching/two-forms
-  // RE: https://nextjs.org/learn/basics/data-fetching/request-time
-  // RE: https://nextjs.org/docs/basic-features/data-fetching
+const Layout = ({ children, themeToggler }) => {
+  console.log("layout");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(init());
+    console.log("layout2");
   }, [dispatch]);
 
   return (
     <>
       <MyHead />
-      {/**
-       * TODO: it could be more efficient in using markups.
-       * children is duplicated -> looks like it affects the performance (a little).
-       * Could use SearchBar and DarkModeToggle just once by CSS tricks.
-       * If we updated the layout (similar to the one in the Material Music project) from a designing perspective we could avoid duplicating children.
-       */}
       <MediaContextProvider>
-        <Media at='sm'>
-          <MainWrapper theme={theme}>
+        <Media at="sm">
+          <MainWrapper>
             <AppHeader />
-            <ContentWrapper theme={theme}>
-              {children}
-            </ContentWrapper>
+            <ContentWrapper>{children}</ContentWrapper>
           </MainWrapper>
         </Media>
-        <Media greaterThan='sm'>
-          <MainWrapper theme={theme}>
+        <Media greaterThan="sm">
+          <MainWrapper>
             <Sidebar />
-            <div className='desktop-widgets-container'>
-              <SearchBar id='desktop' />
-              <DarkModeToggle
-                id='desktop'
-                className='left-margin' />
+            <Desktopwidgets>
+              <SearchBar id="desktop" />
+              <ThemeToggler themeToggler={themeToggler} />
               <TheUser />
-            </div>
-            <style jsx>{`
-              .desktop-widgets-container {
-                position: absolute;
-                top: 0;
-                right: 0;
-                padding: 2rem;
-                display: flex;
-                align-items: center;
-              }
-
-              .desktop-widgets-container > :global(*:not(:first-child)) {
-                margin-left: 12px;
-              }
-            `}</style>
-            <ContentWrapper theme={theme}>
-              {children}
-            </ContentWrapper>
+            </Desktopwidgets>
+            <ContentWrapper>{children}</ContentWrapper>
           </MainWrapper>
         </Media>
       </MediaContextProvider>
@@ -79,4 +60,4 @@ const Layout = ({
   );
 };
 
-export default withTheme(Layout);
+export default Layout;

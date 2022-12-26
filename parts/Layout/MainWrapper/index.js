@@ -1,30 +1,23 @@
+import styled from "styled-components";
 
-import clsx from 'clsx';
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  user-select: none;
+ 
 
-const MainWrapper = ({
-  theme,
-  className = '',
-  children
-}) => (
-  <>
-    <div className={clsx('main-wrapper', className)}>
-      {children}
-    </div>
-    <style jsx>{`
-      .main-wrapper {
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        user-select: none;
-      }
+  @media ${props => (props.theme.mediaQueries.large)} {
+    flex-direction: column;
+  }
+`;
 
-      @media ${theme.mediaQueries.large} {
-        .main-wrapper {
-          flex-direction: column;
-        }
-      }
-    `}</style>
-  </>
-);
+const MainWrapper = ({ children }) => {
+  return (
+    <>
+      <Container>{children}</Container>
+    </>
+  );
+};
 
 export default MainWrapper;

@@ -1,97 +1,67 @@
+import SIZE_TYPES from "utils/constants/size-types";
+import styled from "styled-components";
 
+const Heading1 = styled.h1`
+  margin-bottom: 0.5rem;
+  color: ${({ theme }) => theme.palettetextprimary};
 
-import clsx from 'clsx';
+  font-size: ${(props) =>
+    props.size === SIZE_TYPES.LARGE ? "3.75rem" : "3rem"};
 
-import withTheme from 'utils/hocs/withTheme';
-import SIZE_TYPES from 'utils/constants/size-types';
+  font-weight: ${({ theme }) => theme.typography.fontWeightLight};
 
-const Title = ({
-  theme,
-  size = SIZE_TYPES.MEDIUM,
-  children
-}) => (
+  line-height: ${(props) => (props.size === SIZE_TYPES.LARGE ? "1.2" : "1")};
+
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    font-size: ${(props) =>
+      props.size === SIZE_TYPES.LARGE ? "3rem" : "2.125rem"};
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.small} {
+    font-size: ${(props) =>
+      props.size === SIZE_TYPES.LARGE ? "2.125rem" : "1.5rem"};
+  }
+`;
+
+const Heading2 = styled.h2`
+  color: ${({ theme }) => theme.palettetextsecondary};
+  font-size: ${(props) =>
+    props.size === SIZE_TYPES.LARGE ? "1.5rem" : "1.25rem"};
+  font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+
+  line-height: ${(props) => (props.size === SIZE_TYPES.LARGE ? "1.5" : "1")};
+
+  text-transform: uppercase;
+  @media ${({ theme }) => theme.mediaQueries.medium} {
+    font-size: ${(props) =>
+      props.size === SIZE_TYPES.LARGE ? "1.25rem" : "1rem"};
+  }
+`;
+const Container = styled.div`
+  margin-bottom: 2rem;
+`;
+const Title = ({ children, size = SIZE_TYPES.MEDIUM }) => (
   <>
-    <h1 className='title'>{children}</h1>
-    <style jsx>{`
-      .title {
-        margin-bottom: 0.5rem;
-        color: var(--palette-text-primary);
-        font-size: ${size === SIZE_TYPES.LARGE ? '3.75rem' : '3rem'};
-        font-weight: ${theme.typography.fontWeightLight};
-        line-height: ${size === SIZE_TYPES.LARGE ? '1.2' : '1'};
-        text-transform: uppercase;
-        letter-spacing: -0.5px;
-      }
-    
-      @media ${theme.mediaQueries.medium} {
-        .title {
-          font-size: ${size === SIZE_TYPES.LARGE ? '3rem' : '2.125rem'};
-        }
-      }
-    
-      @media ${theme.mediaQueries.small} {
-        .title {
-          font-size: ${size === SIZE_TYPES.LARGE ? '2.125rem' : '1.5rem'};
-        }
-      }
-    `}</style>
+    <Heading1 size={size}>{children}</Heading1>
   </>
 );
 
-const Subtitle = ({
-  theme,
-  size,
-  children
-}) => (
+const Subtitle = ({ size, children }) => (
   <>
-    <h2 className='subtitle'>{children}</h2>
-    <style jsx>{`
-      .subtitle {
-        color: var(--palette-text-secondary);
-        font-size: ${size === SIZE_TYPES.LARGE ? '1.5rem' : '1.25rem'};
-        font-weight: ${theme.typography.fontWeightBold};
-        line-height: ${size === SIZE_TYPES.LARGE ? '1.5' : '1'};
-        text-transform: uppercase;
-      }
-    
-      @media ${theme.mediaQueries.medium} {
-        .subtitle {
-          font-size: ${size === SIZE_TYPES.LARGE ? '1.25rem' : '1rem'};
-        }
-      }
-    `}</style>
+    <Heading2>{children}</Heading2>
   </>
 );
 
-const Header = ({
-  theme,
-  title,
-  subtitle,
-  size,
-  className,
-  ...rest
-}) => (
+const Header = ({ title, subtitle, size, ...rest }) => (
   <>
-    <div
-      {...rest}
-      className={clsx('header', className)}>
-      <Title
-        theme={theme}
-        size={size}>
-        {title}
-      </Title>
-      <Subtitle
-        theme={theme}
-        size={size}>
-        {subtitle}
-      </Subtitle>
-    </div>
-    <style jsx>{`
-      .header {
-        margin-bottom: 2rem;
-      }
-    `}</style>
+    <Container {...rest}>
+      <Title size={size}>{title}</Title>
+      <Subtitle size={size}>{subtitle}</Subtitle>
+    </Container>
   </>
 );
 
-export default withTheme(Header);
+export default Header;

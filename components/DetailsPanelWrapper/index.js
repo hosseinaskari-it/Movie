@@ -1,29 +1,20 @@
+import styled from "styled-components";
 
-const DETAILS_PANEL_WRAPPER = 'details-panel-wrapper';
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
 
-const DetailsPanelWrapper = ({
-  theme,
-  children
-}) => (
+  @media ${({ theme }) => theme.mediaQueries.smaller} {
+    padding: 1.5rem 1.5rem;
+  }
+`;
+
+const DetailsPanelWrapper = ({ children }) => (
   <>
-    <div className={DETAILS_PANEL_WRAPPER}>
-      {children}
-    </div>
-    <style jsx>{`
-      .${DETAILS_PANEL_WRAPPER} {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem 3rem;
-      }
-
-      @media ${theme.mediaQueries.smaller} {
-        .${DETAILS_PANEL_WRAPPER} {
-          padding: 1.5rem 1.5rem;
-        }
-      }
-    `}</style>
+    <Container>{children}</Container>
   </>
 );
 

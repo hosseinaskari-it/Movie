@@ -1,22 +1,11 @@
+import Link from "next/link";
+import Buttonpagination from "components/UI/Buttonbase/Buttonpaginiation";
 
-
-import Link from 'next/link';
-
-import Button from 'components/UI/Button';
-
-const LinkButton = ({
-  as,
-  href,
-  anchorProps = {},
-  buttonProps = {}
-}) => (
+const LinkButton = ({ as, href, anchorProps = {}, buttonProps = {} }) => (
   <>
-    <Link
-      passHref
-      as={as}
-      href={href}>
+    <Link passHref as={as} href={href}>
       <a {...anchorProps}>
-        <Button {...buttonProps} />
+        <Buttonpagination {...buttonProps} />
       </a>
     </Link>
   </>

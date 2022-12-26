@@ -1,5 +1,3 @@
-
-
 import { STORAGE_KEY } from 'config/app-level';
 
 const saveState = state => {

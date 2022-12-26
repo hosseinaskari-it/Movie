@@ -1,30 +1,22 @@
+import MoviesGridContainer from "./MoviesGridContainer/MoviesGridContainer";
+import MovieListItem from "./MovieListItem";
+import Pagination from "components/Pagination";
 
-
-import MoviesGridContainer from './MoviesGridContainer';
-import MovieListItem from './MovieListItem';
-import Pagination from 'components/Pagination';
-import withTheme from 'utils/hocs/withTheme';
-
-const MovieList = ({
-  theme,
-  movies,
-  baseUrl
-}) => (
+const MovieList = ({ theme, movies, baseUrl }) => (
   <>
-    <MoviesGridContainer theme={theme}>
+    <MoviesGridContainer>
       {movies.results.map((movie, index) => (
         <MovieListItem
           theme={theme}
           key={movie.id}
           movie={movie}
-          fetchpriority={index === 0? "high" : "low"}
-          baseUrl={baseUrl} />
+          fetchpriority={index === 0 ? "high" : "low"}
+          baseUrl={baseUrl}
+        />
       ))}
     </MoviesGridContainer>
-    <Pagination
-      page={movies.page}
-      totalPages={movies.total_pages} />
+    <Pagination page={movies.page} totalPages={movies.total_pages} />
   </>
 );
 
-export default withTheme(MovieList);
+export default MovieList;

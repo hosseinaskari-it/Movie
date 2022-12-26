@@ -1,50 +1,38 @@
+import styled from "styled-components";
 
+const FormSearch = styled.form`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: ${({ theme }) => theme.shadows[1]};
+  background-color: ${({ theme }) => theme.palettesecondarydark};
+  border: 1px solid ${({ theme }) => theme.palettesecondarymain};
+  width: ${(props) => (props.opened ? "30rem" : "2rem")};
+  cursor: ${(props) => (props.opened ? "auto" : "pointer")};
+  padding: 2rem;
+  height: 2rem;
+  outline: none;
+  border-radius: 100px;
+  transition: width ${({ theme }) => theme.transitions.duration.standard}ms
+    ${({ theme }) => theme.transitions.easing.easingout};
 
-const Form = React.forwardRef(({
-  opened,
-  theme,
-  children,
-  ...rest
-}, ref) => (
+  @media ${({ theme }) => theme.mediaQueries.large} {
+    padding: 1.5rem;
+    border: 1px solid transparent;
+    background-color: ${({ theme }) => theme.palettesecondarymain};
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.smaller} {
+    max-width: 16rem;
+  }
+`;
+
+const Form = React.forwardRef(({ opened, children, ...rest }, ref) => (
   <>
-    <form
-      ref={ref}
-      className='form'
-      {...rest}>
+    <FormSearch opened={opened} ref={ref} {...rest}>
       {children}
-    </form>
-    <style jsx>{`
-      .form {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: ${theme.shadows[1]};
-        background-color: var(--palette-secondary-dark);
-        border: 1px solid var(--palette-secondary-main);
-        width: ${opened ? '30rem' : '2rem'};
-        cursor: ${opened ? 'auto' : 'pointer'};
-        padding: 2rem;
-        height: 2rem;
-        outline: none;
-        border-radius: 100px;
-        transition: width ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut};
-      }
-    
-      @media ${theme.mediaQueries.large} {
-        .form {
-          padding: 1.5rem;
-          border: 1px solid transparent;
-          background-color: var(--palette-secondary-main);
-        }
-      }
-    
-      @media ${theme.mediaQueries.smaller} {
-        .form {
-          max-width: 16rem;
-        }
-      }
-    `}</style>
+    </FormSearch>
   </>
 ));
 
