@@ -114,7 +114,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        {/* MEMO: inspired by https://addyosmani.com/blog/preload-hero-images/ */}
+      
         <link
           rel="preload"
           as="fetch"
